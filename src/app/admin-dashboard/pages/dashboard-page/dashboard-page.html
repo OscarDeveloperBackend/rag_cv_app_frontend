@@ -1,0 +1,28 @@
+<section class="container mx-auto px-4 py-10 max-w-5xl">
+  <div class="mb-10">
+    <h1 class="text-4xl font-bold">Gestión de Puestos</h1>
+
+    <p class="text-base-content/70 mt-2">
+      Administra las vacantes publicadas y revisa sus postulantes.
+    </p>
+  </div>
+
+  <div class="mb-8">
+    <filter-category (categoriaChange)="categori.set($event)" />
+  </div>
+
+  <!-- Contenedor con altura máxima y scroll -->
+  <div class="max-h-[600px] overflow-y-auto pr-2">
+    <div class="space-y-4">
+      @if (postsFiltrados().length) {
+        @for (post of postsFiltrados(); track post.id) {
+          <post-admin [post]="post" />
+        }
+      } @else {
+        <div class="alert">
+          <span>No existen puestos registrados.</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+<div>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold">
+      Crear cuenta
+    </h2>
+
+    <p class="text-base-content/70 mt-2">
+      Regístrate para acceder a nuevas oportunidades laborales.
+    </p>
+  </div>
+
+  <form
+    class="space-y-6"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmint()"
+  >
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          Nombres
+        </legend>
+
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          formControlName="nombres"
+          placeholder="Remigio"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          Apellidos
+        </legend>
+
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          formControlName="apellidos"
+          placeholder="Huarcaya"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          DNI
+        </legend>
+
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          formControlName="dni"
+          placeholder="12345678"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          Edad
+        </legend>
+
+        <input
+          type="number"
+          class="input input-bordered w-full"
+          formControlName="edad"
+          placeholder="25"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          Teléfono
+        </legend>
+
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          formControlName="telefono"
+          placeholder="987654321"
+        />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">
+          Email
+        </legend>
+
+        <input
+          type="email"
+          class="input input-bordered w-full"
+          formControlName="email"
+          placeholder="correo@ejemplo.com"
+        />
+      </fieldset>
+
+    </div>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">
+        Contraseña
+      </legend>
+
+      <input
+        type="password"
+        class="input input-bordered w-full"
+        formControlName="password"
+        placeholder="••••••••"
+      />
+    </fieldset>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-full"
+    >
+      Crear cuenta
+    </button>
+
+    @if (hasError()) {
+      <div role="alert" class="alert alert-error">
+        <span>
+          Registro no efectuado. Verifique la información ingresada.
+        </span>
+      </div>
+    }
+
+    <div class="divider">
+      o
+    </div>
+
+    <p class="text-center text-sm">
+      ¿Ya tienes una cuenta?
+
+      <a
+        routerLink="/auth/login"
+        class="link link-primary font-semibold"
+      >
+        Iniciar sesión
+      </a>
+    </p>
+
+  </form>
+</div>

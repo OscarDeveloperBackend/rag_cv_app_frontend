@@ -1,0 +1,43 @@
+<section class="container mx-auto px-4 py-10">
+  <!-- Encabezado -->
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold">Oportunidades Laborales</h2>
+
+    <p class="text-base-content/70 mt-2">
+      Explora las ofertas disponibles y encuentra el puesto ideal para ti.
+    </p>
+  </div>
+
+  <!-- Filtros -->
+  <div class="mb-8">
+    <filter-category (categoriaChange)="categori.set($event)" />
+  </div>
+
+  <!-- Resultados -->
+  <div>
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-xl font-semibold">Puestos disponibles</h3>
+
+      <!-- Más adelante -->
+      <!-- <span class="badge badge-primary">120 vacantes</span> -->
+    </div>
+
+    <!-- Grid de postulaciones -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      @if (postsFiltrados().length != 0) {
+        @for (post of postsFiltrados(); track post.id) {
+          <card-post [post]="post" />
+        }
+      }
+      <!--  -->
+      @else {
+        <!-- Placeholder temporal -->
+        <div class="col-span-full">
+          <div class="alert">
+            <span> Actualmente no contamos con puestos de trabajo de esta Area </span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

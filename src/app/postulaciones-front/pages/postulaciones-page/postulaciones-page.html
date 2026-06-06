@@ -1,0 +1,49 @@
+<section class="container mx-auto px-4 py-10 max-w-4xl">
+  <div class="mb-10">
+    <h1 class="text-4xl font-bold">Mis Postulaciones</h1>
+
+    <p class="text-base-content/70 mt-2">
+      Consulta el estado de las vacantes a las que has postulado.
+    </p>
+  </div>
+
+  <div class="space-y-4">
+    @for (postulacion of misPostulacionesResource.value(); track postulacion.puesto_id) {
+      <div class="card bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+        <div class="card-body">
+          <div class="flex justify-between items-start gap-4">
+            <div>
+              <a [routerLink]="['/post', postulacion.puesto_id]" class="link link-info">
+                <h2 class="card-title text-xl">
+                  {{ postulacion.titulo }}
+                </h2>
+              </a>
+
+              <p class="text-base-content/70 mt-1">
+                Estado:
+                <span class="font-medium">
+                  {{ postulacion.estado }}
+                </span>
+              </p>
+            </div>
+
+            <div class="text-right">
+              <div
+                class="radial-progress text-primary"
+                [style.--value]="postulacion.match_percentage"
+              >
+                {{ postulacion.match_percentage }}%
+              </div>
+
+              <p class="text-xs mt-2 text-base-content/60">Compatibilidad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="alert">
+        <span> Aún no has realizado ninguna postulación. </span>
+      </div>
+    }
+  </div>
+</section>

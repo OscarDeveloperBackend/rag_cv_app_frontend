@@ -1,0 +1,43 @@
+<div class="card bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+  <div class="card-body">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+      <div>
+        <h2 class="card-title">
+          {{ postulante().nombres }}
+          {{ postulante().apellidos }}
+        </h2>
+
+        <p class="text-base-content/70">
+          {{ postulante().email }}
+        </p>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <div class="badge badge-success badge-lg">{{ postulante().match_percentage }}%</div>
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn" onclick="my_modal_1.showModal()">Ver Match</button>
+        <dialog id="my_modal_1" class="modal">
+          <div class="modal-box">
+            <h3 class="text-lg font-bold">Match</h3>
+            <p class="py-4">{{ postulante().ai_summary }}</p>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+
+        <a
+          [href]="postulante().cv_url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Ver CV
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

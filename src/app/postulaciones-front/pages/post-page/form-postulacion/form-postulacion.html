@@ -1,0 +1,108 @@
+<div class="card bg-base-100 shadow-md mt-10 relative overflow-hidden">
+  <div
+    class="card-body transition-all"
+    [class.blur-sm]="!isAuthenticated()"
+    [class.pointer-events-none]="!isAuthenticated()"
+  >
+    <h2 class="card-title text-2xl">Postular al puesto</h2>
+
+    @if (hasError()) {
+      <div role="alert" class="alert alert-error">
+        <span>Fallo al Postular</span>
+      </div>
+    }
+
+    @if (yaPostulo()) {
+      <!-- 👈 Mensaje de éxito -->
+      <div role="alert" class="alert alert-success">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>¡Postulación enviada exitosamente!</span>
+      </div>
+
+      <div class="text-center py-8">
+        <p class="mb-4">Tu CV ha sido enviado al reclutador.</p>
+      </div>
+    } @else {
+      <!-- Todo el formulario actual va aquí dentro -->
+      <p class="text-base-content/70">
+        Verifica tu información y adjunta tu CV para completar la postulación.
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Datos del postulante -->
+      <div class="grid md:grid-cols-3 gap-4">
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Nombre</span>
+          </label>
+          <p type="text" class="w-full">{{ authService.user()?.nombres }}</p>
+        </div>
+
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Apellido</span>
+          </label>
+          <p type="text" class="w-full">{{ authService.user()?.apellidos }}</p>
+        </div>
+
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Email</span>
+          </label>
+          <p type="text" class="w-full">{{ authService.user()?.email }}</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <form class="space-y-6" [formGroup]="myForm" (ngSubmit)="onSubmint()">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Curriculum Vitae (PDF)</legend>
+          <input
+            type="file"
+            accept=".pdf"
+            class="file-input file-input-bordered w-full"
+            (change)="onFileSelected($event)"
+          />
+          <label class="label">
+            <span class="label-text-alt"> Solo archivos PDF. </span>
+          </label>
+        </fieldset>
+
+        <div class="divider">Importante</div>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">URL de Google Drive</legend>
+          <input
+            type="url"
+            class="input input-bordered w-full"
+            formControlName="cv_url"
+            placeholder="https://drive.google.com/..."
+          />
+          <label class="label">
+            <span class="label-text-alt"> Comparte el enlace de tu CV almacenado en Drive. </span>
+          </label>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary btn-lg w-full">Enviar postulación</button>
+      </form>
+    }
+  </div>
+
+  @if (!isAuthenticated()) {
+    <div
+      class="absolute inset-0 flex items-center justify-center bg-base-100/70 backdrop-blur-[2px]"
+    >
+      <div class="text-center max-w-sm px-6">
+        <h3 class="text-2xl font-bold mb-3">Inicia sesión para postular</h3>
+        <p class="text-base-content/70 mb-6">
+          Debes iniciar sesión o crear una cuenta para enviar tu CV a esta oferta laboral.
+        </p>
+        <a (click)="login()" class="btn btn-primary"> Iniciar sesión </a>
+      </div>
+    </div>
+  }
+</div>

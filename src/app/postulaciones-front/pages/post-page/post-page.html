@@ -1,0 +1,94 @@
+<section class="container mx-auto px-4 py-10">
+  <!-- Encabezado -->
+  <div class="mb-8">
+    <div class="badge badge-primary badge-lg mb-4">
+      {{ postulacionResource.value()?.categoria }}
+    </div>
+
+    <h1 class="text-4xl font-bold mb-2">
+      {{ postulacionResource.value()?.titulo }}
+    </h1>
+
+    <p class="text-base-content/70">Publicado hace 2 días • Lima, Perú</p>
+  </div>
+
+  <!-- Contenido -->
+  <div class="grid lg:grid-cols-3 gap-8">
+    <!-- Información principal -->
+    <div class="lg:col-span-2">
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Descripción del puesto</h2>
+
+          <p>
+            {{ postulacionResource.value()?.descripcion }}
+          </p>
+
+          <p>
+            Buscamos personas proactivas, con capacidad para trabajar en equipo y deseos de
+            crecimiento profesional dentro de proyectos innovadores.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-md mt-6">
+        <div class="card-body">
+          <h2 class="card-title mb-4">Requisitos</h2>
+
+          <ul class="list-disc pl-6 space-y-2">
+            @for (requisito of requisitos(); track $index) {
+              <li>{{ requisito | titlecase }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div>
+      <div class="card bg-base-100 shadow-md sticky top-4">
+        <div class="card-body">
+          <h2 class="card-title">Información</h2>
+
+          <div class="space-y-3 mt-2">
+            <div>
+              <span class="font-semibold">Modalidad:</span>
+              Presencial
+            </div>
+
+            <div>
+              <span class="font-semibold">Ubicación:</span>
+              Lima
+            </div>
+
+            <div>
+              <span class="font-semibold">Jornada:</span>
+              Tiempo completo
+            </div>
+
+            <div>
+              <span class="font-semibold">Vacantes:</span>
+              3
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    @if (yaPostulado()) {
+      <div class="alert alert-success">
+        <span> Ya postulaste a este puesto. </span>
+      </div>
+    } @else {
+      <form-postulacion
+        [returnUrl]="urlReturn"
+        [isAuthenticated]="authService.authStatus() === 'authenticated'"
+        [puestoId]="id"
+      />
+    }
+  </section>
+</section>

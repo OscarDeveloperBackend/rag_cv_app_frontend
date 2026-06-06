@@ -1,0 +1,59 @@
+<div>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold">Bienvenido de nuevo</h2>
+
+    <p class="text-base-content/70 mt-2">Inicia sesión para continuar con tus postulaciones.</p>
+  </div>
+
+  <form class="space-y-5" [formGroup]="myForm" (ngSubmit)="onSubmint()">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Correo electrónico</legend>
+
+      <input
+        type="email"
+        class="input input-bordered w-full"
+        formControlName="email"
+        placeholder="correo@ejemplo.com"
+      />
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Contraseña</legend>
+
+      <input
+        type="password"
+        class="input input-bordered w-full"
+        formControlName="password"
+        placeholder="••••••••"
+      />
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary w-full">Ingresar</button>
+    @if (hasError()) {
+      <div role="alert" class="alert alert-error">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 shrink-0 stroke-current"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>Credenciales Invalidas</span>
+      </div>
+    }
+
+    <div class="divider">o</div>
+
+    <p class="text-center text-sm">
+      ¿No tienes una cuenta?
+
+      <a routerLink="/auth/register" class="link link-primary font-semibold"> Regístrate aquí </a>
+    </p>
+  </form>
+</div>
